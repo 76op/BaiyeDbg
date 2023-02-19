@@ -68,8 +68,6 @@
     </None>
     <None Include="drv_mapper.sys" />
     <None Include="BaiyeDbg.sys" />
-    <None Include="bluepill.sys" />
-    <None Include="hv.sys" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Client.ico">

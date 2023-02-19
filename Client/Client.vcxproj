@@ -213,9 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BaiyeDbg.sys" />
-    <None Include="bluepill.sys" />
     <None Include="drv_mapper.sys" />
-    <None Include="hv.sys" />
     <None Include="res\Client.rc2" />
   </ItemGroup>
   <ItemGroup>
