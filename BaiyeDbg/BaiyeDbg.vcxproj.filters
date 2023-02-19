@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Driver Files">
+      <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
+      <Extensions>inf;inv;inx;mof;mc;</Extensions>
+    </Filter>
+    <Filter Include="Header Files\ce_kernel">
+      <UniqueIdentifier>{5ebf05d7-5675-484f-a408-602275dabab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ce_kernel">
+      <UniqueIdentifier>{66d255c9-f337-4172-83b9-81c6d13520f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ce_kernel\amd64">
+      <UniqueIdentifier>{f7867caf-a650-46b7-8162-bb4ee497fd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ce_kernel\ultimap2">
+      <UniqueIdentifier>{4f3f3a93-7507-4702-8227-3a8cd9fadc5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ce_kernel\ultimap2">
+      <UniqueIdentifier>{470de2b0-7d64-47fe-87cc-6b684a25a510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hv">
+      <UniqueIdentifier>{f5255df6-b87f-4c18-8b44-1921726f7e51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hv">
+      <UniqueIdentifier>{9f3fdc01-fe67-4550-9e6d-87f466ef3ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\injector">
+      <UniqueIdentifier>{2359825c-bf23-4079-8d4c-15a6ffa6f78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\injector">
+      <UniqueIdentifier>{08302c09-23c6-4e8f-8d69-b4c4ac34ef2d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="BaiyeDbg.inf">
+      <Filter>Driver Files</Filter>
+    </Inf>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hooklib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="_global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mem_search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nt_kernel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\IOPLDispatcher.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\DBKFunc.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\debugger.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\deepkernel.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\interruptHook.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\kfiles.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\memscan.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\noexceptions.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\processlist.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\sigcheck.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\tdiwrapper.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\tdiwrapper.cpp">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\threads.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\ultimap.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\ultimap2.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\vmxhelper.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\vmxoffload.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\ultimap2\apic.c">
+      <Filter>Source Files\ce_kernel\ultimap2</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\ultimap2\IOPLDispatcher.c">
+      <Filter>Source Files\ce_kernel\ultimap2</Filter>
+    </ClCompile>
+    <ClCompile Include="ce_kernel\DbkUtil.c">
+      <Filter>Source Files\ce_kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="exception_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="user_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lde.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\vmcs.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\main.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\vcpu.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\hypercalls.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\exit-handlers.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\hv.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\mp.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\idt.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\ept.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\gdt.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\introspection.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\mm.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\mtrr.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\page-tables.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\segment.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\timing.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="hypercall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="injector\addrsup.cpp">
+      <Filter>Source Files\injector</Filter>
+    </ClCompile>
+    <ClCompile Include="injector\allocvm.cpp">
+      <Filter>Source Files\injector</Filter>
+    </ClCompile>
+    <ClCompile Include="injector\mmsearch.cpp">
+      <Filter>Source Files\injector</Filter>
+    </ClCompile>
+    <ClCompile Include="injector\ntkernels.cpp">
+      <Filter>Source Files\injector</Filter>
+    </ClCompile>
+    <ClCompile Include="injector\ntmmpts.cpp">
+      <Filter>Source Files\injector</Filter>
+    </ClCompile>
+    <ClCompile Include="hv\dbvmext.cpp">
+      <Filter>Source Files\hv</Filter>
+    </ClCompile>
+    <ClCompile Include="myapi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hooklib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_kernel_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem_search.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nt_kernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_debug_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_ob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="comm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\IOPLDispatcher.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\DBKFunc.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\debugger.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\deepkernel.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\extradefines.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\extraimports.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\interruptHook.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\kfiles.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\memscan.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\noexceptions.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\processlist.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\sigcheck.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\tdiwrapper.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\threads.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\ultimap.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\ultimap2.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\ultimap2\UltimapDrvr.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\vmxhelper.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\vmxoffload.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\ultimap2\apic.h">
+      <Filter>Header Files\ce_kernel\ultimap2</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\ultimap2\IOPLDispatcher.h">
+      <Filter>Header Files\ce_kernel\ultimap2</Filter>
+    </ClInclude>
+    <ClInclude Include="ce_kernel\DbkUtil.h">
+      <Filter>Header Files\ce_kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="exception_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ida_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="user_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lde.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="idt_shadow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\exit-handlers.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\vcpu.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\guest-context.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\mp.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\arch.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\idt.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\trap-frame.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\segment.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\page-tables.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\mtrr.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\mm.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\hypercalls.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\gdt.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\exception-routines.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\ept.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\hv.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\interrupt-handlers.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\introspection.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\vmcs.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\vmx.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\ia32.hpp">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\timing.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="hypercall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ntkernels.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ntstructs.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\mmsearch.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ntmmapi.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ia32.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ntmi.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="injector\ntmmpts.h">
+      <Filter>Header Files\injector</Filter>
+    </ClInclude>
+    <ClInclude Include="hv\dbvmext.h">
+      <Filter>Header Files\hv</Filter>
+    </ClInclude>
+    <ClInclude Include="myapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="ce_kernel\amd64\dbkfunca.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="ce_kernel\amd64\debuggera.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="ce_kernel\amd64\noexceptionsa.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="ce_kernel\amd64\ultimapa.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="ce_kernel\amd64\vmxhelpera.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="ce_kernel\amd64\vmxoffloada.asm">
+      <Filter>Source Files\ce_kernel\amd64</Filter>
+    </MASM>
+    <MASM Include="hv\arch.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+    <MASM Include="hv\exception-routines.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+    <MASM Include="hv\interrupt-handlers.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+    <MASM Include="hv\vm-exit.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+    <MASM Include="hv\vm-launch.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+    <MASM Include="hv\vmx.asm">
+      <Filter>Source Files\hv</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BaiyeDbg.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hv\vmx.inl">
+      <Filter>Source Files\hv</Filter>
+    </None>
+  </ItemGroup>
+</Project>
