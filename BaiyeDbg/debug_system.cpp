@@ -1,4 +1,196 @@
+//
+// Debug System
+//
+
 #include "debug_system.h"
+#include "debug_status_code.h"
+
+DEBUG_BRIDGE g_DebugBridge = { 0 };
+
+//
+// internel function
+// find and out debugee object
+//
+BOOL DbgsiFindDebugeeEntry(uint64_t DebugeeId, OUT PDEBUGEE_ENTRY *outDebugeeEntry)
+{
+	PLIST_ENTRY Entry;
+	PDEBUGEE_ENTRY Object;
+
+	ExAcquireFastMutex(&g_DebugBridge.Mutex);
+
+	for (Entry = g_DebugBridge.DebugeeList.Flink;
+		Entry != &g_DebugBridge.DebugeeList;
+		Entry = Entry->Flink)
+	{
+		Object = CONTAINING_RECORD(Entry, DEBUGEE_ENTRY, DebugeeList);
+
+		if (Object->DebugeeId == DebugeeId)
+		{
+			ExReleaseFastMutex(&g_DebugBridge.Mutex);
+			*outDebugeeEntry = Object;
+			return TRUE;
+		}
+	}
+	ExReleaseFastMutex(&g_DebugBridge.Mutex);
+	*outDebugeeEntry = NULL;
+	return FALSE;
+}
+
+BOOL DbgsiFindDebugObject(uint64_t DebugeeId, uint64_t DebuggerId, OUT PDEBUG_OBJECT *outDebugObject)
+{
+	PLIST_ENTRY Entry;
+	PDEBUGEE_ENTRY DebugeeEntry;
+	PDEBUGGER_ENTRY DebuggerEntry;
+
+	ExAcquireFastMutex(&g_DebugBridge.Mutex);
+
+	for (Entry = g_DebugBridge.DebugeeList.Flink;
+		Entry != &g_DebugBridge.DebugeeList;
+		Entry = Entry->Flink)
+	{
+		DebugeeEntry = CONTAINING_RECORD(Entry, DEBUGEE_ENTRY, DebugeeList);
+
+		if (DebugeeEntry->DebugeeId == DebugeeId)
+		{
+			break;
+		}
+	}
+
+	for (Entry = DebugeeEntry->DebuggerList.Flink;
+		Entry != &DebugeeEntry->DebuggerList;
+		Entry = Entry->Flink)
+	{
+		DebuggerEntry = CONTAINING_RECORD(Entry, DEBUGGER_ENTRY, DebuggerList);
+
+		if (DebuggerEntry->DebuggerId == DebuggerId)
+		{
+			break;
+		}
+	}
+
+	*outDebugObject = (PDEBUG_OBJECT)DebuggerEntry->DebugObject;
+
+	ExReleaseFastMutex(&g_DebugBridge.Mutex);
+}
+
+//
+// Initialize debug system
+//
+// enviroment:
+//   Kernel mode, vmx-nonroot
+//
+void DbgsInitialize()
+{
+	//g_DebugState.DebuggerList = (PDEBUGGER_STATE)ExAllocatePoolWithTag(NonPagedPool, sizeof(DEBUGGER_STATE), POOL_TAG);
+
+	ExInitializeFastMutex(&g_DebugBridge.Mutex);
+	InitializeListHead(&g_DebugBridge.DebugeeList);
+}
+
+//
+// Destory debug system
+//
+// enviroment:
+//   Kernel mode, vmx-nonroot
+//
+void DbgsDestory()
+{
+
+}
+
+VOID DbgsCreateDebugObject(OUT PDEBUG_OBJECT *outDebugObject)
+{
+	PDEBUG_OBJECT DebugObject = (PDEBUG_OBJECT)ExAllocatePoolWithTag(NonPagedPool, sizeof(DEBUG_OBJECT), POOL_TAG);
+
+	RtlSecureZeroMemory(DebugObject, sizeof(DEBUG_OBJECT));
+
+	ExInitializeFastMutex(&DebugObject->Mutex);
+	InitializeListHead(&DebugObject->EventList);
+	KeInitializeEvent(&DebugObject->EventsPresent, NotificationEvent, FALSE);
+
+	DebugObject->Flags = DEBUG_OBJECT_KILL_ON_CLOSE;
+
+	if (((PEPROCESS_BY)PsGetCurrentProcess())->WoW64Process != NULL)
+	{
+		DebugObject->Flags |= DEBUG_OBJECT_WOW64_DEBUGGER;
+	}
+
+	*outDebugObject = DebugObject;
+}
+
+//
+// Add debugger, call by debugger
+//
+// enviroment:
+//   Kernel mode, vmx-nonroot
+//
+NTSTATUS DbgsStartDebug(uint64_t DebugeeId)
+{
+	NTSTATUS Status;
+	PEPROCESS_BY DebuggerProcess;
+	PEPROCESS_BY DebugeeProcess;
+
+	PDEBUG_BRIDGE DebugBridge;
+	PDEBUG_OBJECT DebugObject;
+
+	PDEBUGEE_ENTRY DebugeeEntry;
+	PDEBUGGER_ENTRY DebuggerEntry;
+
+
+	DebuggerProcess = (PEPROCESS_BY)PsGetCurrentProcess();
+
+	Status = PsLookupProcessByProcessId((HANDLE)DebugeeId, (PEPROCESS *)&DebugeeProcess);
+
+	if (NT_SUCCESS(Status))
+	{
+		if (DebugeeProcess == DebuggerProcess || (PEPROCESS)DebugeeProcess == PsInitialSystemProcess)
+		{
+			ObfDereferenceObject(DebugeeProcess);
+			return STATUS_ACCESS_DENIED;
+		}
+
+		if (DbgsiFindDebugeeEntry( (uint64_t)DebugeeProcess->UniqueProcessId, &DebugeeEntry) )
+		{
+			ObfDereferenceObject(DebugeeProcess);
+			return STATUS_ERROR_DEBUGEE_OBJECT_ALREADY_EXISTS;
+		}
+
+		Log("DbgsStartDebug+ 调试器: %s, 被调试进程: %s", DebuggerProcess->ImageFileName, DebugeeProcess->ImageFileName);
+
+		//
+		// Create debug object
+		//
+		DbgsCreateDebugObject(&DebugObject);
+
+		//
+		// Create debugee entry and debugger entry,
+		// insert to debug bridge
+		//
+
+		ExAcquireFastMutex(&g_DebugBridge.Mutex);
+
+		DebugeeEntry = (PDEBUGEE_ENTRY)ExAllocatePoolWithTag(NonPagedPool, sizeof(DEBUGEE_ENTRY), POOL_TAG);
+		DebugeeEntry->DebugeeId = (uint64_t)DebugeeProcess->UniqueProcessId;
+		InitializeListHead(&DebugeeEntry->DebugeeList);
+		InitializeListHead(&DebugeeEntry->DebuggerList);
+
+		InsertTailList(&g_DebugBridge.DebugeeList, &DebugeeEntry->DebugeeList);
+
+
+		DebuggerEntry = (PDEBUGGER_ENTRY)ExAllocatePoolWithTag(NonPagedPool, sizeof(DEBUGGER_ENTRY), POOL_TAG);
+		DebuggerEntry->DebuggerId = (uint64_t)DebuggerProcess->UniqueProcessId;
+		DebuggerEntry->DebugObject = DebugObject;
+		InitializeListHead(&DebuggerEntry->DebuggerList);
+
+		InsertTailList(&DebugeeEntry->DebuggerList, &DebuggerEntry->DebuggerList);
+
+		ExReleaseFastMutex(&g_DebugBridge.Mutex);
+
+		ObDereferenceObject(DebugeeProcess);
+	}
+
+	return Status;
+}
 
 nt_kernel *debug_system::ntkrnl = nullptr;
 
@@ -1934,17 +2126,13 @@ VOID NTAPI debug_system::New_KiDispatchException(
 
 		//用户模式也有一次进入KiDebugRoutine的机会.
 
-		if (ExceptionRecord->ExceptionCode == STATUS_BREAKPOINT || 
-			ExceptionRecord->ExceptionCode == STATUS_SINGLE_STEP)
+		HANDLE pid = PsGetCurrentProcessId();
+		if (debug_system::get_state_by_debugee_pid(uint64_t(pid), nullptr))
 		{
-			HANDLE pid = PsGetCurrentProcessId();
-			if (debug_system::get_state_by_debugee_pid(uint64_t(pid), nullptr))
+			//User
+			if (New_DbgkForwardException(ExceptionRecord, TRUE, FALSE))
 			{
-				//User
-				if (New_DbgkForwardException(ExceptionRecord, TRUE, FALSE))
-				{
-					return; //如果调试器处理成功 直接返回 不继续处理了 仅只给一次机会.
-				}
+				return; //如果调试器处理成功 直接返回 不继续处理了 仅只给一次机会.
 			}
 		}
 
@@ -1955,10 +2143,9 @@ VOID NTAPI debug_system::New_KiDispatchException(
 		Fn_KiDispatchException KiDispatchException = (Fn_KiDispatchException)hook_KiDispatchException->bridge();
 		if (!KiDispatchException)
 		{
-			DbgBreakPoint();//必死无疑
+			DbgBreakPoint(); //die
 		}
 
-		//失败或正常进入 则再次执行
 		return KiDispatchException(ExceptionRecord, ExceptionFrame, TrapFrame, PreviousMode, FirstChance);
 	}
 	else

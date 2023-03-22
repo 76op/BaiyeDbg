@@ -216,6 +216,9 @@
     <ClCompile Include="myapi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="breakpoint_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hooklib.h">
@@ -429,6 +432,12 @@
       <Filter>Header Files\hv</Filter>
     </ClInclude>
     <ClInclude Include="myapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_status_code.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="breakpoint_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

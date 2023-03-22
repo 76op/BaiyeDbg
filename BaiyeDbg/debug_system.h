@@ -12,16 +12,67 @@
 
 #include <list>
 
-struct debug_state_t
+
+//
+// Debugger
+//
+typedef struct _DEBUGGER_ENTRY
 {
-	// 被调试进程id
-	uint64_t debugee_pid;
+	LIST_ENTRY DebuggerList;
 
-	// 调试器进程id
-	uint64_t debugger_pid;
+	uint64_t DebuggerId;
 
-	PVOID debug_object;
-};
+	// Transfer debug events
+	PVOID DebugObject;
+}DEBUGGER_ENTRY, *PDEBUGGER_ENTRY;
+
+//
+// Debugee
+//
+typedef struct _DEBUGEE_ENTRY
+{
+	LIST_ENTRY DebugeeList;
+
+	uint64_t DebugeeId;
+
+	LIST_ENTRY DebuggerList;
+}DEBUGEE_ENTRY, *PDEBUGEE_ENTRY;
+
+//
+// Debug all data
+// Connect debugger and debugee use process id
+// A debugee have multi debugger
+//
+typedef struct _DEBUG_BRIDGE
+{
+	FAST_MUTEX Mutex;
+
+	LIST_ENTRY DebugeeList;		// struct _DEBUGEE_OBJECT
+}DEBUG_BRIDGE, *PDEBUG_BRIDGE;
+
+
+// TODO: multi debugee
+//typedef struct _DEBUG_STATE_LIST
+//{
+//	LIST_ENTRY List;
+//
+//	DEBUG_STATE DebugState;
+//}DEBUG_STATE_LIST, *PDEBUG_STATE_LIST;
+
+
+BOOL DbgsiFindDebugeeEntry(uint64_t DebugeeId, OUT PDEBUGEE_ENTRY *outDebugeeEntry);
+
+BOOL DbgsiFindDebugObject(uint64_t DebugeeId, uint64_t DebuggerId, OUT PDEBUG_OBJECT *outDebugObject);
+
+void DbgsInitialize();
+void DbgsDestory();
+
+VOID DbgsCreateDebugObject(OUT PDEBUG_OBJECT *DebugObject);
+VOID DbgsDestoryDebugObject(uint64_t DebugeeId);
+
+NTSTATUS DbgsStartDebug(uint64_t DebugeeId);
+NTSTATUS DbgsStopDebug();
+
 
 
 class debug_state

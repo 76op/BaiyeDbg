@@ -28,6 +28,8 @@
 #define DEBUG_OBJECT_DELETE_PENDING (0x1) // Debug object is delete pending.
 #define DEBUG_OBJECT_KILL_ON_CLOSE  (0x2) // Kill all debugged processes on close
 
+#define DEBUG_OBJECT_WOW64_DEBUGGER  (0x4) // Debugger is a x86 process
+
 
 //
 // Valid return values for the PORT_MESSAGE Type file

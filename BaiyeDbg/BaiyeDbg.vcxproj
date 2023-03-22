@@ -244,6 +244,7 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="breakpoint_manager.cpp" />
     <ClCompile Include="ce_kernel\DBKFunc.c" />
     <ClCompile Include="ce_kernel\DbkUtil.c" />
     <ClCompile Include="ce_kernel\debugger.c" />
@@ -301,6 +302,7 @@
     <ClCompile Include="_global.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="breakpoint_manager.h" />
     <ClInclude Include="ce_kernel\DBKFunc.h" />
     <ClInclude Include="ce_kernel\DbkUtil.h" />
     <ClInclude Include="ce_kernel\debugger.h" />
@@ -324,6 +326,7 @@
     <ClInclude Include="ce_kernel\vmxhelper.h" />
     <ClInclude Include="ce_kernel\vmxoffload.h" />
     <ClInclude Include="comm.h" />
+    <ClInclude Include="debug_status_code.h" />
     <ClInclude Include="debug_system.h" />
     <ClInclude Include="exception_system.h" />
     <ClInclude Include="hooklib.h" />
