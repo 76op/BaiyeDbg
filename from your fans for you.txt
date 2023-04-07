@@ -1,0 +1,11 @@
+hi,body
+just one question
+about set ept software breakpoint at R3
+I need KeStackAttachProcess then create MDL Mapping view on virtual address in kernel mode
+then call MmProbeAndLockPages lockup page memory
+in VMcall to set ept breakpoint
+It's that right?
+So,tell me How does it find out what accesses the address and current register context information at After hitting the breakpoint
+it should be EptViolationHandle\VmexitHandler or maybe VM exception
+anyway, I mean which VM function can handle this breakpoint
+Please get back to me. It means a lot to me
